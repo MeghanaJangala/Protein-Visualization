@@ -1,0 +1,106 @@
+/* Body styling */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #0f1117;
+    color: #f0f0f0;
+  }
+  
+  /* Layout */
+  .container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 300px;
+    background-color: #1c1f26;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    border-right: 2px solid #2a2e36;
+  }
+  
+  .sidebar h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+  
+  .sidebar a {
+    color: #4ea8de;
+    text-decoration: none;
+  }
+  
+  .sidebar textarea {
+    background-color: #111111;
+    color: #f0f0f0;
+    padding: 12px;
+    border-radius: 8px;
+    resize: none;
+    height: 200px;
+    font-family: monospace;
+    border: none;
+  }
+  
+  .sidebar button {
+    background-color: #3b82f6;
+    color: white;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  
+  /* Main viewer */
+  .viewer {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #0f1117;
+    overflow-y: auto;
+  }
+  
+  .viewer h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+  
+  #viewer {
+    width: 600px;
+    height: 500px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #1e1e1e;
+  }
+  
+  /* pLDDT */
+  .plddt-bar {
+    background-color: #2d3748;
+    padding: 12px;
+    border-radius: 8px;
+    width: 300px;
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-align: center;
+  }
+  
+  .download-button {
+    background-color: #10b981;
+    color: #ffffff;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  
