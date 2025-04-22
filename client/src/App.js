@@ -15,7 +15,7 @@ function App() {
     const lines = pdbString.split('\n');
     let sum = 0;
     let count = 0;
-    
+
     lines.forEach(line => {
       if (line.startsWith('ATOM')) {
         const bFactor = parseFloat(line.substring(60, 66).trim());
@@ -23,14 +23,14 @@ function App() {
         count++;
       }
     });
-    
+
     return count > 0 ? (sum / count).toFixed(4) : 0;
   };
 
   const handlePredict = async () => {
     setLoading(true);
     setError(null);
-    
+
     try {
       if (!sequence || sequence.length < 10) {
         throw new Error('Please enter a valid protein sequence (minimum 10 characters)');
@@ -43,11 +43,11 @@ function App() {
         },
         body: JSON.stringify({ sequence }),
       });
-      
+
       if (!response.ok) {
         throw new Error('Prediction failed - server error');
       }
-      
+
       const data = await response.json();
       if (!data.pdb) {
         throw new Error('Invalid PDB data received');
@@ -79,20 +79,20 @@ function App() {
           <p>
             <a href="https://esmatlas.com/about" target="_blank" rel="noopener noreferrer">ESMFold</a> is an end-to-end single sequence protein structure predictor.
           </p>
-          
+
           <Form.Group controlId="sequenceInput" className="mb-3">
             <Form.Label>Input sequence</Form.Label>
-            <Form.Control 
-              as="textarea" 
-              rows={15} 
-              value={sequence} 
+            <Form.Control
+              as="textarea"
+              rows={15}
+              value={sequence}
               onChange={(e) => setSequence(e.target.value)}
               placeholder="Enter protein sequence..."
             />
           </Form.Group>
-          
-          <Button 
-            variant="primary" 
+
+          <Button
+            variant="primary"
             onClick={handlePredict}
             disabled={loading}
             className="w-100"
@@ -100,30 +100,35 @@ function App() {
             {loading ? 'Predicting...' : 'Predict'}
           </Button>
         </Col>
-        
+
         <Col md={9} className="main-content p-4">
           {error && <Alert variant="danger">{error}</Alert>}
-          
+
           {!sequence && (
             <Alert variant="warning">👈 Enter protein sequence data!</Alert>
           )}
-          
-          {pdbData && (
-            <>
+
+        {pdbData && (
+          <>
+            <div className="center-text-content mt-4">
               <h2>Visualization of predicted protein structure</h2>
+            </div>
+            <div className="protein-viewer-container">
               <ProteinViewer pdbData={pdbData} />
-              
-              <div className="mt-4 p-3 bg-light rounded">
-                <h2>plDDT</h2>
-                <p>plDDT is a per-residue estimate of the confidence in prediction on a scale from 0-100.</p>
-                <p className="plddt-value">plDDT: {calculatePlDDT(pdbData)}</p>
-                
-                <Button variant="success" onClick={downloadPdb} className="mt-2">
-                  Download PDB
-                </Button>
-              </div>
-            </>
-          )}
+            </div>
+
+            <div className="center-text-content mt-4 p-3 bg-light rounded">
+              <h2>plDDT</h2>
+              <p>plDDT is a per-residue estimate of the confidence in prediction on a scale from 0-100.</p>
+              <p className="plddt-value">plDDT: {calculatePlDDT(pdbData)}</p>
+
+              <Button variant="success" onClick={downloadPdb} className="mt-2">
+                Download PDB
+              </Button>
+            </div>
+          </>
+        )}
+
         </Col>
       </Row>
     </Container>
